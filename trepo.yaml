@@ -7,6 +7,13 @@
        name=git
         state=latest
   - name: ensure spring-petclinic cloned to local disk
+    git:
+       repo=https://github.com/fluidesign/spring-petclinic.git
+       dest=/home/ec2-user/spring-petclinic
+       clone=yes
+       accept_hostkey=yes
+
+  - name: trepo
     git: 
        repo=https://github.com/fluidesign/trepo.git
        dest=/home/ec2-user/trepo
