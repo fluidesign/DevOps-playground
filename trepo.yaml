@@ -18,4 +18,5 @@
        repo=https://github.com/fluidesign/trepo.git
        dest=/home/ec2-user/trepo
        clone=yes
+       update=no
        accept_hostkey=yes
