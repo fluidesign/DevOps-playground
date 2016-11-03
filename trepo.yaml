@@ -5,7 +5,7 @@
   - name: ensure git-client installed at the latest version
     yum:
        name=git
-        state=latest
+       state=latest
   - name: ensure spring-petclinic cloned to local disk
     git:
        repo=https://github.com/fluidesign/spring-petclinic.git
@@ -20,3 +20,16 @@
        clone=yes
        update=no
        accept_hostkey=yes
+  - name: ensure docker is installed
+    yum: 
+        name=docker
+        state=latest
+  - name: enuse ec2-user inside of docker group
+    user: 
+        name=ec2-user
+        groups=docker
+        append=yes
+  - name: ensure docker is running
+    service:
+        name=docker
+        state=started
