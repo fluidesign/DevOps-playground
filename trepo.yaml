@@ -37,6 +37,22 @@
     unarchive:
         copy=no 
         src=http://apache.mivzakim.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-        dest=~/
-        creates=~/apache-maven-3.3.9
-
+        dest=/home/ec2-user/
+        creates=/home/ec2-user/apache-maven-3.3.9
+  - name: Ensure Jenkins Yum repo present
+    become: yes
+    become_method: sudo
+    get_url: url=http://pkg.jenkins-ci.org/redhat/jenkins.repo
+           dest=/etc/yum.repos.d/jenkins.repo mode=0644
+  - name: Ensure Jenkins GPG key installed
+    command: rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+    become: yes
+    become_method: sudo
+  - name: Ensure Jenkins installed
+    yum: name=jenkins state=present
+    become: yes
+    become_method: sudo
+  - name: Ensure Jenkins is running
+    service: name=jenkins state=running enabled=true
+    become: yes
+    become_method: sudo
