@@ -33,3 +33,10 @@
     service:
         name=docker
         state=started
+  - name: ensure maven unpacked
+    unarchive:
+        copy=no 
+        src=http://apache.mivzakim.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+        dest=~/
+        creates=~/apache-maven-3.3.9
+
